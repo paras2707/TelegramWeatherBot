@@ -135,7 +135,12 @@ app.get("/", (req, res) => {
 });
 
 app.get("/settings", async (req, res) => {
-  res.send({ TELEGRAM_BOT_TOKEN, OPENWEATHERMAP_API_KEY });
+  const settings = await setting.find();
+  if (settings.length > 0) {
+    res.send(settings[0]);
+  } else {
+    res.send(null);
+  }
 });
 app.use("/admin", userRouter);
 app.use("/settings", settingRouter);
