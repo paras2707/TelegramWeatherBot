@@ -30,7 +30,7 @@ const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: true });
 const storage = {};
 
 async function getSettings() {
-  const settings = await setting.find();
+  const settings = await setting.find({});
   if (settings.length > 0) {
     return settings[0];
   } else {
