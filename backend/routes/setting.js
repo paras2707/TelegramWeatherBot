@@ -22,13 +22,16 @@ router.post("/", async (req, res) => {
   }
 });
 
+// router.get("/", async (req, res) => {
+//   const settings = await setting.find();
+//   if (settings.length > 0) {
+//     res.send(settings[0]);
+//   } else {
+//     res.send(null);
+//   }
+// });
 router.get("/", async (req, res) => {
-  const settings = await setting.find();
-  if (settings.length > 0) {
-    res.send(settings[0]);
-  } else {
-    res.send(null);
-  }
+  res.send("Setting API");
 });
 
 module.exports = router;
