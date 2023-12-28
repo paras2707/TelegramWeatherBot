@@ -133,6 +133,10 @@ bot.on("message", async (msg) => {
 app.get("/", (req, res) => {
   res.send("Weather Bot");
 });
+
+app.get("/settings", (req, res) => {
+  res.send({ TELEGRAM_BOT_TOKEN, OPENWEATHERMAP_API_KEY });
+});
 app.use("/admin", userRouter);
 app.use("/settings", settingRouter);
 

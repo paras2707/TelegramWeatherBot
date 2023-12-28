@@ -30,8 +30,5 @@ router.post("/", async (req, res) => {
 //     res.send(null);
 //   }
 // });
-router.get("/", async (req, res) => {
-  res.send("Setting API");
-});
 
 module.exports = router;
