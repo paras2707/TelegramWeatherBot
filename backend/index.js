@@ -13,7 +13,13 @@ require("dotenv").config();
 
 const app = express();
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://telegram-weather-bot-frontend.vercel.app/"],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
 // ------------------- API Variables ------------------- //
 let TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
