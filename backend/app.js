@@ -1,3 +1,4 @@
+require("dotenv").config();
 const express = require("express");
 const TelegramBot = require("node-telegram-bot-api");
 const axios = require("axios");
@@ -9,21 +10,14 @@ const userRouter = require("./routes/user");
 const settingRouter = require("./routes/setting");
 const setting = require("./models/setting");
 
-require("dotenv").config();
-
 const app = express();
 app.use(express.json());
-app.use(
-  cors({
-    origin: ["https://telegram-weather-bot-frontend.vercel.app"],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true,
-  })
-);
+app.use(cors());
 
 // ------------------- API Variables ------------------- //
 let TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 let OPENWEATHERMAP_API_KEY = process.env.OPENWEATHERMAP_API_KEY;
+const PORT = process.env.PORT || 3000;
 
 // -------------------Telegram Bot Functions ------------------- //
 const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: true });
@@ -169,11 +163,9 @@ setInterval(async () => {
 }, 15000);
 
 // ------------------- Server ------------------- //
-app.listen(3000, () => {
+app.listen(PORT, () => {
   mongoose
-    .connect(
-      "mongodb+srv://paras27:paras2727@weatherbot.2steeey.mongodb.net/WeatherUsers"
-    )
+    .connect(process.env.MONGODB_URL)
     .then(() => {
       console.log("Connected to MongoDB");
     })
