@@ -133,15 +133,6 @@ bot.on("message", async (msg) => {
 app.get("/", (req, res) => {
   res.send("Weather Bot");
 });
-
-app.get("/settings", async (req, res) => {
-  const settings = await setting.find();
-  if (settings.length > 0) {
-    res.send(settings[0]);
-  } else {
-    res.send("No settings found");
-  }
-});
 app.use("/admin", userRouter);
 app.use("/settings", settingRouter);
 
