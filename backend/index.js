@@ -29,14 +29,14 @@ let OPENWEATHERMAP_API_KEY = process.env.OPENWEATHERMAP_API_KEY;
 const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: true });
 const storage = {};
 
-// async function getSettings() {
-//   const settings = await setting.find({});
-//   if (settings.length > 0) {
-//     return settings[0];
-//   } else {
-//     return null;
-//   }
-// }
+async function getSettings() {
+  const settings = await setting.find({});
+  if (settings.length > 0) {
+    return settings[0];
+  } else {
+    return null;
+  }
+}
 
 async function saveUser(userId, username = "", city) {
   const user = await User.findOne({ userId });
@@ -138,35 +138,35 @@ app.use("/settings", settingRouter);
 
 // ------------------- Cron Job ------------------- //
 // Sends weather updates to all users at 10:00 AM everyday according to indian standard time
-// cron.schedule(
-//   "0 0 10 * * *",
-//   async () => {
-//     const users = await User.find();
-//     users.forEach(async (user) => {
-//       if (!user.isBlocked) {
-//         const messageText = await getWeatherData(
-//           user.city,
-//           user.userId,
-//           user.username
-//         );
-//         bot.sendMessage(user.userId, messageText);
-//       }
-//     });
-//   },
-//   {
-//     scheduled: true,
-//     timezone: "Asia/Kolkata",
-//   }
-// );
+cron.schedule(
+  "0 0 10 * * *",
+  async () => {
+    const users = await User.find();
+    users.forEach(async (user) => {
+      if (!user.isBlocked) {
+        const messageText = await getWeatherData(
+          user.city,
+          user.userId,
+          user.username
+        );
+        bot.sendMessage(user.userId, messageText);
+      }
+    });
+  },
+  {
+    scheduled: true,
+    timezone: "Asia/Kolkata",
+  }
+);
 
 // ------------------- Checking Api Keys ------------------- //
-// setInterval(async () => {
-//   const settings = await getSettings();
-//   if (settings && settings.bot_token && settings.openweathermap_api_key) {
-//     TELEGRAM_BOT_TOKEN = settings.bot_token;
-//     OPENWEATHERMAP_API_KEY = settings.openweathermap_api_key;
-//   }
-// }, 15000);
+setInterval(async () => {
+  const settings = await getSettings();
+  if (settings && settings.bot_token && settings.openweathermap_api_key) {
+    TELEGRAM_BOT_TOKEN = settings.bot_token;
+    OPENWEATHERMAP_API_KEY = settings.openweathermap_api_key;
+  }
+}, 15000);
 
 // ------------------- Server ------------------- //
 app.listen(3000, () => {
