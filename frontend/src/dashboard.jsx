@@ -9,7 +9,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://telegram-weather-bot-six.vercel.app/admin")
+      .get("https://telegram-weather-bot-six.vercel.app/admin")
       .then((res) => {
         setUsers(res.data);
       });
@@ -17,7 +17,7 @@ const Dashboard = () => {
 
   const handleDelete = (userId) => {
     axios
-      .delete(`http://telegram-weather-bot-six.vercel.app/admin/${userId}`)
+      .delete(`https://telegram-weather-bot-six.vercel.app/admin/${userId}`)
       .then(() => {
         setUsers(users.filter((user) => user._id !== userId));
       });
@@ -27,7 +27,7 @@ const Dashboard = () => {
     const status = e.target.checked;
     if (status) {
       axios
-        .put(`http://telegram-weather-bot-six.vercel.app/admin/${id}`, {
+        .put(`https://telegram-weather-bot-six.vercel.app/admin/${id}`, {
           isBlocked: true,
         })
         .then(() => {
@@ -39,7 +39,7 @@ const Dashboard = () => {
         });
     } else {
       axios
-        .put(`http://telegram-weather-bot-six.vercel.app/admin/${id}`, {
+        .put(`https://telegram-weather-bot-six.vercel.app/admin/${id}`, {
           isBlocked: false,
         })
         .then(() => {
@@ -57,7 +57,7 @@ const Dashboard = () => {
       return alert("Please fill all fields");
     else {
       axios
-        .post("http://telegram-weather-bot-six.vercel.app/settings", {
+        .post("https://telegram-weather-bot-six.vercel.app/settings", {
           botToken: botToken,
           apiKey: apiKey,
         })
