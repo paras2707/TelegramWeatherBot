@@ -12,6 +12,10 @@ const Dashboard = () => {
       .get("https://telegram-weather-bot-six.vercel.app/admin")
       .then((res) => {
         setUsers(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+        setUsers([]);
       });
   }, []);
 

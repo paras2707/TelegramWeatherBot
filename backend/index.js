@@ -141,7 +141,7 @@ app.use("/settings", settingRouter);
 cron.schedule(
   "0 0 10 * * *",
   async () => {
-    const users = await User.find();
+    const users = await User.find({});
     users.forEach(async (user) => {
       if (!user.isBlocked) {
         const messageText = await getWeatherData(
