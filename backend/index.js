@@ -139,7 +139,7 @@ app.get("/settings", async (req, res) => {
   if (settings.length > 0) {
     res.send(settings[0]);
   } else {
-    res.send(null);
+    res.send("No settings found");
   }
 });
 app.use("/admin", userRouter);
