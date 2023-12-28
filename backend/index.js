@@ -130,6 +130,9 @@ bot.on("message", async (msg) => {
 });
 
 // ------------------- routes ------------------- //
+app.get("/", (req, res) => {
+  res.send("Weather Bot");
+});
 app.use("/admin", userRouter);
 app.use("/settings", settingRouter);
 
