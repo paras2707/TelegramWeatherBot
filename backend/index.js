@@ -166,7 +166,7 @@ setInterval(async () => {
     TELEGRAM_BOT_TOKEN = settings.bot_token;
     OPENWEATHERMAP_API_KEY = settings.openweathermap_api_key;
   }
-}, 10000);
+}, 15000);
 
 // ------------------- Server ------------------- //
 app.listen(3000, () => {
