@@ -16,5 +16,5 @@
 
 Note: To change the city name again repeat the above procedure by typing "/start" to the bot.
 
-Deployed Frontend Link: https://beautiful-scone-529c49.netlify.app
-Deployed Backend Link: https://weatherbotbackend-m3l5.onrender.com
+- Deployed Frontend Link: https://beautiful-scone-529c49.netlify.app
+- Deployed Backend Link: https://weatherbotbackend-m3l5.onrender.com
