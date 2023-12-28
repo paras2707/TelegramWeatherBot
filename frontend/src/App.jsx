@@ -23,6 +23,7 @@ function App() {
                   navigate("/dashboard");
                 }}
                 onError={() => {
+                  alert("Login Failed");
                   console.log("Login Failed");
                 }}
               />
