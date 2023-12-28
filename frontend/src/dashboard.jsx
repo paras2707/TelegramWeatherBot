@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { BASE_URL } from "./helper";
 
 const Dashboard = () => {
   const [users, setUsers] = useState([]);
@@ -9,7 +10,7 @@ const Dashboard = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/admin")
+      .get(`${BASE_URL}/admin`)
       .then((res) => {
         setUsers(res.data);
       })
@@ -20,7 +21,7 @@ const Dashboard = () => {
   }, []);
 
   const handleDelete = (userId) => {
-    axios.delete(`http://localhost:3000/admin/${userId}`).then(() => {
+    axios.delete(`${BASE_URL}/admin/${userId}`).then(() => {
       setUsers(users.filter((user) => user._id !== userId));
     });
   };
@@ -29,7 +30,7 @@ const Dashboard = () => {
     const status = e.target.checked;
     if (status) {
       axios
-        .put(`http://localhost:3000/admin/${id}`, {
+        .put(`${BASE_URL}/admin/${id}`, {
           isBlocked: true,
         })
         .then(() => {
@@ -41,7 +42,7 @@ const Dashboard = () => {
         });
     } else {
       axios
-        .put(`http://localhost:3000/admin/${id}`, {
+        .put(`${BASE_URL}/admin/${id}`, {
           isBlocked: false,
         })
         .then(() => {
@@ -59,7 +60,7 @@ const Dashboard = () => {
       return alert("Please fill all fields");
     else {
       axios
-        .post("http://localhost:3000/settings", {
+        .post(`${BASE_URL}/settings`, {
           botToken: botToken,
           apiKey: apiKey,
         })
