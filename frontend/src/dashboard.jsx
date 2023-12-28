@@ -8,28 +8,22 @@ const Dashboard = () => {
   const [apiKey, setApiKey] = useState("");
 
   useEffect(() => {
-    axios
-      .get("https://telegram-weather-bot-six.vercel.app/admin")
-      .then((res) => {
-        setUsers(res.data);
-      });
+    axios.get("http://localhost:3000/admin").then((res) => {
+      setUsers(res.data);
+    });
   }, []);
 
   const handleDelete = (userId) => {
-    axios
-      .delete(`https://telegram-weather-bot-six.vercel.app/admin/${userId}`)
-      .then(() => {
-        setUsers(users.filter((user) => user._id !== userId));
-      });
+    axios.delete(`http://localhost:3000/admin/${userId}`).then(() => {
+      setUsers(users.filter((user) => user._id !== userId));
+    });
   };
 
   const handleBlock = (e, id) => {
     const status = e.target.checked;
     if (status) {
       axios
-        .put(`https://telegram-weather-bot-six.vercel.app/admin/${id}`, {
-          isBlocked: true,
-        })
+        .put(`http://localhost:3000/admin/${id}`, { isBlocked: true })
         .then(() => {
           setUsers(
             users.map((user) =>
@@ -39,9 +33,7 @@ const Dashboard = () => {
         });
     } else {
       axios
-        .put(`https://telegram-weather-bot-six.vercel.app/admin/${id}`, {
-          isBlocked: false,
-        })
+        .put(`http://localhost:3000/admin/${id}`, { isBlocked: false })
         .then(() => {
           setUsers(
             users.map((user) =>
@@ -57,13 +49,13 @@ const Dashboard = () => {
       return alert("Please fill all fields");
     else {
       axios
-        .post("https://telegram-weather-bot-six.vercel.app/settings", {
+        .post("http://localhost:3000/settings", {
           botToken: botToken,
           apiKey: apiKey,
         })
         .then((res) => {
           document.getElementById("my_modal_3").close();
-          console.log(res);
+          console.log(res.data);
         })
         .catch((err) => {
           console.log(err);
