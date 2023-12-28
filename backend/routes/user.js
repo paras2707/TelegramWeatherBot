@@ -20,10 +20,4 @@ router.put("/:id", async (req, res) => {
   res.send(user);
 });
 
-router.post("/settings", async (req, res) => {
-  const keys = req.body;
-  console.log(keys);
-  res.send(keys);
-});
-
 module.exports = router;
